@@ -6,6 +6,7 @@ let numbers = [7, 3, 1, 5, 8];
 let chosenBar; // Variabel for hvilken stolpe som er valgt
 let inputValue; // Variabel for hva som er skrevet i input-feltet
 let barBorder;
+let result = "";
 let resultBar = "ingen";
 const enableBtn = document.querySelectorAll('.enable-btn');
 
@@ -26,8 +27,9 @@ function show() {
         Verdi:
         <input type="number" min="1" max="10" oninput="inputValue = this.value" />
         <button onclick="addBar()">Legg til stolpe</button>
-        <button ${chosenBar ? chosenBar : "disabled"}>Endre valgt stolpe</button><br />
+        <button ${chosenBar ? chosenBar : "disabled"} onclick="changeBar">Endre valgt stolpe</button><br />
         <button ${chosenBar ? chosenBar : "disabled"} onclick="removeBar()">Fjerne valgt stolpe</button>
+        <div id="result">${result}</div>
     `;
 }
 
@@ -61,7 +63,7 @@ function clickedBar(posInArray) {
         chosenBar = null; 
         resultBar = "ingen";
         // enableBtn.disabled = true;
-    }else {
+    } else {
         console.log("posInArray is: ", posInArray)
         
         chosenBar = posInArray;
@@ -73,7 +75,7 @@ function clickedBar(posInArray) {
 }
 
 //removes chosen bar on clicking Fjerne valgt stolpe button. It's a bit wonky, won't show before you click another bar
-function removeBar(barNo) {
+function removeBar() {
     numbers.splice(chosenBar, 1);
     show;
 }
@@ -81,7 +83,18 @@ function removeBar(barNo) {
 //adds another bar after you've added a value from 1 to and with 10 and clicked Legg til stolpe button
 function addBar() {
     numbers.push(`${inputValue}`);
-    show()
+    show();
+}
+
+function changeBar() {
+    if(inputValue <= 10 && inputValue >= 1 && inputValue != null) {
+        numbers[chosenBar - 1] = inputValue;
+        inputValue = 0;
+    }
+    else {
+        result("Oppgi gyldig tall fra 1 til 10");
+    }
+    show();
 }
 
 
@@ -92,3 +105,4 @@ function addBar() {
 //thing === true ? "Do this if true" : "Do this if false";
 
 //barNo = parameter
+
