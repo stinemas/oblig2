@@ -72,13 +72,13 @@ function clickedBar(posInArray) {
     show();
 }
 
+//removes chosen bar on clicking Fjerne valgt stolpe button. It's a bit wonky, won't show before you click another bar
 function removeBar(barNo) {
-    const barArrPos = barNo - 1;
-    numbers.pop(barArrPos, 1);
+    numbers.splice(chosenBar, 1);
     show;
 }
 
-
+//adds another bar after you've added a value from 1 to and with 10 and clicked Legg til stolpe button
 function addBar() {
     numbers.push(`${inputValue}`);
     show()
