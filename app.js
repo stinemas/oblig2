@@ -89,7 +89,6 @@ function addBar() {
 function changeBar() {
     if(inputValue <= 10 && inputValue >= 1 && inputValue != null) {
         numbers[chosenBar - 1] = inputValue;
-        inputValue = 0;
     }
     else {
         result("Oppgi gyldig tall fra 1 til 10");
