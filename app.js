@@ -27,7 +27,7 @@ function show() {
         Verdi:
         <input type="number" min="1" max="10" oninput="inputValue = parseInt(this.value)" />
         <button onclick="addBar()">Legg til stolpe</button>
-        <button ${chosenBar ? chosenBar : "disabled"} onclick="changeBar()">Endre valgt stolpe</button><br />
+        <button ${chosenBar ? chosenBar : "disabled"} onclick="changeBar()">Endre valgt stolpe</button><br/>
         <button ${chosenBar ? chosenBar : "disabled"} onclick="removeBar()">Fjerne valgt stolpe</button>
         <div id="result">${result}</div>
     `;
@@ -41,8 +41,8 @@ function createBar(number, barNo) {
     let height = number * 10;
     let y = 60 - height;
     let color = calcColor(1, 10, barNo);
-    return `<rect onclick="clickedBar(${barNo - 1})" width="${width}" height="${height}"
-                        x="${x}" y="${y}" fill="${color}" class="${chosenBar == barNo - 1 ? "chosen" : ""}"></rect>`;
+    return `<rect onclick="clickedBar(${barNo})" width="${width}" height="${height}"
+                        x="${x}" y="${y}" fill="${color}" class="${chosenBar == barNo ? "chosen" : ""}"></rect>`;
     
 }
 
@@ -76,22 +76,27 @@ function clickedBar(posInArray) {
 
 //removes chosen bar on clicking Fjerne valgt stolpe button. It's a bit wonky, won't show before you click another bar
 function removeBar() {
-    numbers.splice(chosenBar, 1);
+    numbers.splice(chosenBar - 1, 1);
     show();
 }
 
 //adds another bar after you've added a value from 1 to and with 10 and clicked Legg til stolpe button
 function addBar() {
-    numbers.push(inputValue);
+    if(inputValue <= 10 && inputValue >= 1) {
+        numbers.push(inputValue);
+    }
+    else {
+        alert("Oppgi gyldig tall fra 1 til 10")
+    }
     show();
 }
 
 function changeBar() {
     if(inputValue <= 10 && inputValue >= 1) {
-        numbers[chosenBar] = inputValue;
+        numbers[chosenBar - 1] = inputValue;
     }
     else {
-        result("Oppgi gyldig tall fra 1 til 10");
+        alert("Oppgi gyldig tall fra 1 til 10");
     }
     show();
 }
