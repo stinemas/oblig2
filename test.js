@@ -29,7 +29,7 @@ QUnit.test("check if bar is selected", function (assert) {
 
 
 QUnit.test("check if bar is modified", function (assert) {
-    chosenBar = 2;
+    chosenBar = 3;
     inputValue = 6;
     changeBar();
     assert.equal(numbers[2], 6, "Bar 3 value was changed from 1 to 6");
